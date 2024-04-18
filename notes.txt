@@ -1,0 +1,19 @@
+User UI/UX
+-----------
+Entry Point
+    - Landing Page: Has clear value proposition and call-to-action (CTA) such as 
+      "Find your Match Now!"
+
+Onboarding Process
+    - Sign-Up Form: Simple and secure sign-up form by first automating the User 
+      Profile for the client's ease using LLM's. If they do not like their
+      generated profile, they can have the option to edit their profile. Note
+      that the User Profile includes the username, interests, and personality
+      information of the client.
+    - Guide: Brief and optional walkthrough of the service's feature in order
+      for the client to fully maximize their experience.
+      
+User Dashboard
+    - Profile Overiew: User's can view their profile, matches, and chats in one
+      place.
+    - Navigation Menu: Include an menu for access to various parts of the site.
