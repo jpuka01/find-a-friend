@@ -1,0 +1,80 @@
+/* ProfileStyles.css */
+
+.profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.profile-header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-pic-button {
+    display: inline-block;
+    color: #fff;
+    background-color: #ccc;
+    padding: .375rem .75rem;
+    font-size: .5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    cursor: pointer;
+    text-align: center;
+  }
+
+.profile-pic-button-container {
+    margin-top: none;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.profile-details h3, p {
+    margin: 0.5rem 0;
+}
+
+@media screen and (max-width: 940px) {
+    .profile {
+        padding: 1rem;
+    }
+
+    .profile-header {
+        height: 60px;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+}

@@ -1,0 +1,57 @@
+/* LandingPageStyles.css */
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+    background-size: 400% 400%;
+    animation: gradient 25s ease infinite;
+}
+
+.logo {
+    color: black;
+    /* Change logo elements in index.css h2 */
+}
+
+.content {
+    font-size: 2em;
+    text-align: center;
+}
+
+.value-proposition {
+    font-size: 2em;
+    text-align: center;
+}
+
+.get-started {
+    background-color: #007BFF;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.25em;
+    cursor: pointer;
+    font-size: 1.25em;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.get-started:hover {
+    background-color: #0257b1;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+};
