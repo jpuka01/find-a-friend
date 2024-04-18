@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/home" element={<NavBar />} />
+        <Route path="/navbar" element={<NavBar />} />
         <Route path="/" element={<LandingPage />} />
       </Routes>
     </Router>

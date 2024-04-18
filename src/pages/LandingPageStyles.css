@@ -27,7 +27,7 @@
 }
 
 .get-started {
-    background-color: #007BFF;
+    background-color: black;
     color: white;
     padding: 0.5em 1em;
     border: none;
@@ -39,7 +39,8 @@
 }
 
 .get-started:hover {
-    background-color: #0257b1;
+    background-color: white;
+    color: black;
 }
 
 @keyframes gradient {
@@ -55,3 +56,23 @@
         background-position: 0% 50%;
     }
 };
+
+@media screen and (max-width: 940px) {
+    .landing-page {
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .content {
+        font-size: 1.5em;
+    }
+
+    .value-proposition {
+        font-size: 1.5em;
+    }
+
+    .get-started {
+        font-size: 1em;
+    }
+}
