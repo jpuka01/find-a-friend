@@ -1,0 +1,106 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+    background-size: cover;
+    animation: gradient 25s ease infinite;
+}
+/*background-size: 400% 400%*/
+
+.form-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: #00000076;
+    border-radius: 2rem;
+    padding: 3rem 5rem;
+}
+
+.form-page input {
+    color: white;
+    background-color: transparent;}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.brand h1 {
+    font-size: 5vw;
+    color: white;
+    text-transform: uppercase;
+}
+
+input {
+    background-color: transparent;
+    padding: 1rem;
+    border: 1px solid var(--primary-dark);
+    border-radius: 0.4rem;
+    color: white;
+    width: 100%;
+    font-size: 1rem;
+}
+
+input:focus {
+    border: 1px solid var(--primary-dark);
+    outline: none;
+}
+
+.register-button {
+    background-color: black;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0.4rem;
+    border: 1px solid var(--primary-dark);
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.register-button:hover {
+    background-color: white;
+    color: black;
+}
+
+span {
+    color: white;
+    text-transform: uppercase;
+}
+
+span a {
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+};
+
+@media screen and (max-width: 940px) {
+    .formContainer {
+        width: 90vw;
+    }
+
+    .form-page {
+        padding: 2rem 3rem;
+    }
+}

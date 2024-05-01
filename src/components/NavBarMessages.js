@@ -1,26 +1,36 @@
 import React, { useState } from "react";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
-// import { AiOutlineClose } from 'react-icons/ai'
 import Logout from "./Logout";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import "./NavBarStyles.css";
 
-function Navbar() {
+function NavBarMessages({
+  currentUser,
+  showReturnButton,
+  onReturnClick,
+  inChatContainer,
+}) {
   const [nav, setNav] = useState(false);
+
   const handleNav = () => {
     setNav(!nav);
   };
 
   return (
-    <div name="home" className={nav ? "navbar navbar-bg" : "navbar"}>
+    <div className={nav ? "navbar navbar-bg" : "navbar"}>
       <div className="title">
-        <h2>Profile</h2>
+        <h2>Messages</h2>
       </div>
       <ul className="nav-menu">
         <li>
-          <Link to="/chat">Messages</Link>
+          <Link to="/matches">Matches</Link>
+        </li>
+        <li>
+          {currentUser != null && (
+            <Link to={`/user/${currentUser._id}`}>Profile</Link>
+          )}
         </li>
       </ul>
       <div className="hamburger" onClick={handleNav}>
@@ -29,7 +39,12 @@ function Navbar() {
       <div className={nav ? "mobile-menu active" : "mobile-menu"}>
         <ul className="mobile-nav">
           <li>
-            <Link to="/chat">Messages</Link>
+            <Link to="/matches">Matches</Link>
+          </li>
+          <li>
+            {currentUser != null && (
+              <Link to={`/user/${currentUser._id}`}>Profile</Link>
+            )}
           </li>
         </ul>
         <div className="mobile-menu-bottom">
@@ -51,4 +66,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavBarMessages;

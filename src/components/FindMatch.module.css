@@ -1,0 +1,35 @@
+.find-match-root {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(1, 1, 1, 0.2);
+}
+
+.find-match-container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid black;
+  height: 40vh;
+  width: 50vw;
+  padding: 8px;
+}
+
+.find-match-title {
+  text-align: center;
+  margin: 4px;
+}
+
+.find-match-text {
+  margin: 8px;
+}
+
+.find-match-button {
+  margin: 8px;
+}

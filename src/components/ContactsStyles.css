@@ -1,0 +1,48 @@
+.contacts-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.current-user-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+}
+
+.current-user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.current-user-name {
+    flex-grow: 1;
+}
+
+.contacts-list {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.contact-item:hover {
+    background-color: #f9f9f9;
+}
+
+.contact-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}

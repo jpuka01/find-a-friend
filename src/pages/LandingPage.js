@@ -18,7 +18,7 @@ function LandingPage() {
         <div className='value-proposition'>
             <p>Discover friendship and learning through AI-powered connections!</p>
         </div>
-        <Link to='/profile' className='get-started'>Get Started</Link>
+        <Link to='/register' className='get-started'>Get Started</Link>
     </div>
   )
 }
