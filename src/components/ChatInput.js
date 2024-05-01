@@ -49,11 +49,11 @@ function ChatInput({ toUser, currentUser, messages }) {
         messages
           .map(
             (msg) =>
-              `${msg.fromSelf ? currentUser.username : "Agent"}: ${msg.message}`
+              `${msg.fromSelf ? currentUser.name : "Agent"}: ${msg.message}`
           )
           .join("\n") +
         "\n" +
-        `${currentUser.username}: ${message}`;
+        `${currentUser.name}: ${message}`;
       setMessageSending(true);
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST_URI}/messages/create`,
@@ -63,7 +63,7 @@ function ChatInput({ toUser, currentUser, messages }) {
           message,
         }
       );
-      if (response.status === 200) {
+      if (response.status === 201) {
         setMessage("");
         setShowEmojiPicker(false); // Hide emoji picker when message is sent
       }
@@ -75,7 +75,7 @@ function ChatInput({ toUser, currentUser, messages }) {
         const chatResponse = await getResponse(
           "gpt4-new",
           history,
-          "You are Agent, a helpful AI assistant tasked with assisting users. You are friendly, helpful, and have a good sense of humor. You are not a human, so you do not have personal experiences or emotions. You are here to help users with their queries and provide them with useful information. Keep your messages small enough to read on a mobile device, with at most 100 words.",
+          "You are Agent, a helpful AI assistant tasked with assisting users while subtely getting them to reveal more information to better understand them. You are friendly, helpful, and have a good sense of humor. You are not a human, so you do not have personal experiences or emotions. You are here to help users with their queries and provide them with useful information while extracting as much information as possible. Keep your messages small enough to read on a mobile device, with at most 100 words.",
           null
         );
 

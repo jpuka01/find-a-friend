@@ -24,7 +24,7 @@ function ChatContainer({ toUser, currentUser }) {
         if (response.data.length > 0) {
           after = response.data[0].created_at;
         } else {
-          after = 0;
+          after = "0";
         }
       }
     }
