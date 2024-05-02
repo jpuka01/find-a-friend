@@ -1,33 +1,34 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import DefaultIcon from "../assets/Default_pfp.png";
-import './MatchPageStyles.css';
-import MatchNav from '../components/MatchNav';
+import "./MatchPageStyles.css";
+import MatchNav from "../components/MatchNav";
 
 // Component to display match details
 function MatchCard({ match }) {
   const [showFullReason, setShowFullReason] = useState(false);
 
   const truncatedReason = match.reason
-    ? match.reason.substring(0, 300) + (match.reason.length > 100 && !showFullReason ? '...' : '')
+    ? match.reason.substring(0, 300) +
+      (match.reason.length > 100 && !showFullReason ? "..." : "")
     : "No reason provided";
 
-    console.log(match);
+  console.log(match);
   return (
     <div className="match-card">
-       <Link to={`/user/${match.id}`}>
-            <img
-              src={match.avatar || DefaultIcon}
-              alt={`${match.name}'s avatar`}
-            />
+      <Link to={`/user/${match.id}`}>
+        <img src={match.avatar || DefaultIcon} alt={`${match.name}'s avatar`} />
       </Link>
-      <h2>You matched with {match.name || 'Unknown'}!</h2>
+      <h2>You matched with {match.name || "Unknown"}!</h2>
       <div className="match-reason">
         <p>{showFullReason ? match.reason : truncatedReason}</p>
         {match.reason && match.reason.length > 300 && (
-          <button className="expand-button" onClick={() => setShowFullReason(!showFullReason)}>
-            {showFullReason ? 'Show less' : 'Show more'}
+          <button
+            className="expand-button"
+            onClick={() => setShowFullReason(!showFullReason)}
+          >
+            {showFullReason ? "Show less" : "Show more"}
           </button>
         )}
       </div>
@@ -41,12 +42,13 @@ function MatchCard({ match }) {
   );
 }
 
+const emojis = ["🔥", "🎉", "💥", "✨", "🌟"];
+
 // Main Match component
 function Match() {
   const [loaded, setLoaded] = useState(false);
   const [match, setMatch] = useState({});
   const { id } = useParams(); // Get the 'id' from the route parameter
-  const emojis = ['🔥', '🎉', '💥', '✨', '🌟'];
 
   useEffect(() => {
     // Fetch match data from API
@@ -62,7 +64,7 @@ function Match() {
                 id: userData.id,
                 name: userData.name, // Set the name from user data
                 reason: data.reason, // Ensure the reason is directly set from match data
-                avatar: userData.avatar
+                avatar: userData.avatar,
               });
               setLoaded(true);
             })
@@ -80,27 +82,26 @@ function Match() {
       .catch((error) => console.error("Error fetching match data:", error));
   }, [id]); // Dependency array with 'id' to re-run effect if 'id' changes
 
-  const createEmoji = useCallback(() => {
-    const emoji = document.createElement('div');
-    emoji.className = 'emoji';
-    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)]; 
-    emoji.style.left = Math.random() * window.innerWidth + 'px';
-    document.body.appendChild(emoji);
-    setTimeout(() => {
-      document.body.removeChild(emoji);
-    }, 2000); // Remove after 2 seconds
-  }, [emojis]);
-
   useEffect(() => {
-    if (loaded) { // Only start the emoji effect if the page is loaded
-      const intervalId = setInterval(createEmoji, 200); // Create a new emoji every 200ms
+    if (loaded) {
+      // Only start the emoji effect if the page is loaded
+      const intervalId = setInterval(() => {
+        const emoji = document.createElement("div");
+        emoji.className = "emoji";
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(emoji);
+        setTimeout(() => {
+          document.body.removeChild(emoji);
+        }, 2000); // Remove after 2 seconds
+      }, 200); // Create a new emoji every 200ms
       const timeoutId = setTimeout(() => clearInterval(intervalId), 2000); // Stop creating emojis after 2 seconds
       return () => {
         clearInterval(intervalId); // Clean up on component unmount
         clearTimeout(timeoutId); // Also clean up the timeout
       };
     }
-  }, [loaded, createEmoji]);
+  }, [loaded]);
 
   if (!loaded) {
     return <div>Loading...</div>;
@@ -114,7 +115,6 @@ function Match() {
       </div>
     );
   }
-
 }
 
 export default Match;
