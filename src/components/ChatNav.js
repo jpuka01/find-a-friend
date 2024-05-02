@@ -57,7 +57,7 @@ function ChatNav({
                 currentChatUser.id === "00000000-0000-0000-0000-000000000000"
                   ? AiIcon
                   : currentChatUser.avatar
-                  ? currentChatUser.avatarImage
+                  ? currentChatUser.avatar
                   : DefaultAvatar
               }
               alt="Current user"
@@ -71,7 +71,7 @@ function ChatNav({
       </div>
       <ul className="nav-menu">
         <li>
-          <Link to={`/user/${currentUser.id}`}> My Profile</Link>
+          <Link to={`/user/${currentUser.id}`}>My Profile</Link>
         </li>
       </ul>
       <div className="hamburger" onClick={handleNav}>
@@ -79,10 +79,6 @@ function ChatNav({
       </div>
       <div className={nav ? "mobile-menu active" : "mobile-menu"}>
         <ul className="mobile-nav">
-          <Link to="/matches">
-            <li>Matches</li>
-          </Link>
-
           <Link to={`/user/${currentUser.id}`}>
             <li>My Profile</li>
           </Link>

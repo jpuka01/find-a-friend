@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
-import Logout from "./Logout";
+import Logout from "../components/Logout";
 import { FaWhatsapp } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
-import "./NavBarStyles.css";
+import "./MatchNavStyles.css";
 
-function NavBarMessages({ currentUser }) {
+function MatchNav() {
   const [nav, setNav] = useState(false);
 
   const handleNav = () => {
@@ -16,21 +15,15 @@ function NavBarMessages({ currentUser }) {
   return (
     <div className={nav ? "navbar navbar-bg" : "navbar"}>
       <div className="title">
-        <h2>Messages</h2>
+        <h2>Match</h2>
       </div>
       <ul className="nav-menu">
-        <li>
-          <Link to={`/user/${currentUser ? currentUser.id : ''}`}>My Profile</Link>
-        </li>
       </ul>
       <div className="hamburger" onClick={handleNav}>
         <HiOutlineMenuAlt4 className="icon" />
       </div>
       <div className={nav ? "mobile-menu active" : "mobile-menu"}>
         <ul className="mobile-nav">
-          <li>
-            <Link to={`/user/${currentUser ? currentUser.id : ''}`}>My Profile</Link>
-          </li>
         </ul>
         <div className="mobile-menu-bottom">
           <div className="menu-icons">
@@ -51,4 +44,4 @@ function NavBarMessages({ currentUser }) {
   );
 }
 
-export default NavBarMessages;
+export default MatchNav;

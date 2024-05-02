@@ -38,11 +38,13 @@ function Chat() {
   const handleChatChange = (contact) => {
     setCurrentChatUser(contact);
     localStorage.setItem("current-chat", JSON.stringify(contact));
+    navigate(`/chat/${contact.id}`)
   };
 
   const resetChatUser = () => {
     setCurrentChatUser(null);
     localStorage.removeItem("current-chat");
+    navigate(`/chat`);
   };
 
   return (
