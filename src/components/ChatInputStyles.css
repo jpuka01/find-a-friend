@@ -2,6 +2,25 @@ input[type="text"] {
   color: black;
 }
 
+.chat-input-suggestion-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-input-suggestion {
+  padding: 8px;
+  margin: 8px;
+  background-color: #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.chat-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .chat-input {
   display: flex;
   align-items: center;
