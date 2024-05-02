@@ -59,7 +59,9 @@ function ChatInput({ toUser, currentUser, messages }) {
           .slice(0, 20)
           .map(
             (msg) =>
-              `${msg.fromSelf ? currentUser.name : "Agent"}: ${msg.message}`
+              `${
+                msg.sender_id === currentUser.id ? currentUser.name : "Agent"
+              }: ${msg.message}`
           )
           .join("\n") +
         "\n" +
