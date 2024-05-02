@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MessageDisplay from "./MessageDisplay";
 import ChatInput from "./ChatInput";
+import { useParams } from "react-router-dom";
 import "./ChatContainerStyles.css"; // CSS for Chat Container
 
 function ChatContainer({ toUser, currentUser }) {
+  const { id } = useParams();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {

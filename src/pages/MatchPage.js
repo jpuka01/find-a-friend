@@ -1,37 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-
+import DefaultIcon from "../assets/Default_pfp.png";
 import './MatchPageStyles.css';
-import NavBar from '../components/NavBar';
+import MatchNav from '../components/MatchNav';
 
 // Component to display match details
 function MatchCard({ match }) {
-  const [showFullBio, setShowFullBio] = useState(false);
+  const [showFullReason, setShowFullReason] = useState(false);
 
-  const truncateBio = (bio, length = 5) => {
-    if (!bio || bio.length <= length) {
-      return bio;
-    }
-    return bio.substring(0, length) + "...";
-  };
+  const truncatedReason = match.reason
+    ? match.reason.substring(0, 300) + (match.reason.length > 100 && !showFullReason ? '...' : '')
+    : "No reason provided";
 
-  console.log(match);
-
+    console.log(match);
   return (
     <div className="match-card">
+       <Link to={`/user/${match.id}`}>
+            <img
+              src={match.avatar || DefaultIcon}
+              alt={`${match.name}'s avatar`}
+            />
+      </Link>
       <h2>You matched with {match.name || 'Unknown'}!</h2>
       <div className="match-reason">
-        <p>{match.reason || 'No reason provided'}</p>
-        {showFullBio ? <p>{match.bio || 'No bio provided'}</p> : <p>{truncateBio(match.bio)}</p>}
-        <button
-          className="show-more"
-          onClick={() => setShowFullBio((more) => !more)}
-        >
-          {showFullBio ? "Less" : "More"}
-        </button>
+        <p>{showFullReason ? match.reason : truncatedReason}</p>
+        {match.reason && match.reason.length > 300 && (
+          <button className="expand-button" onClick={() => setShowFullReason(!showFullReason)}>
+            {showFullReason ? 'Show less' : 'Show more'}
+          </button>
+        )}
       </div>
-      <button className="chat-button">Start a conversation</button>
+      <Link to={`/chat/${match._id}`}>
+        <button className="chat-button">Start a conversation</button>
+      </Link>
       <Link to={`/user/${match.id}`}>
         <button className="profile-button">Visit their profile</button>
       </Link>
@@ -44,6 +46,7 @@ function Match() {
   const [loaded, setLoaded] = useState(false);
   const [match, setMatch] = useState({});
   const { id } = useParams(); // Get the 'id' from the route parameter
+  const emojis = ['🔥', '🎉', '💥', '✨', '🌟'];
 
   useEffect(() => {
     // Fetch match data from API
@@ -59,6 +62,7 @@ function Match() {
                 id: userData.id,
                 name: userData.name, // Set the name from user data
                 reason: data.reason, // Ensure the reason is directly set from match data
+                avatar: userData.avatar
               });
               setLoaded(true);
             })
@@ -76,18 +80,41 @@ function Match() {
       .catch((error) => console.error("Error fetching match data:", error));
   }, [id]); // Dependency array with 'id' to re-run effect if 'id' changes
 
+  const createEmoji = useCallback(() => {
+    const emoji = document.createElement('div');
+    emoji.className = 'emoji';
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)]; 
+    emoji.style.left = Math.random() * window.innerWidth + 'px';
+    document.body.appendChild(emoji);
+    setTimeout(() => {
+      document.body.removeChild(emoji);
+    }, 2000); // Remove after 2 seconds
+  }, [emojis]);
+
+  useEffect(() => {
+    if (loaded) { // Only start the emoji effect if the page is loaded
+      const intervalId = setInterval(createEmoji, 200); // Create a new emoji every 200ms
+      const timeoutId = setTimeout(() => clearInterval(intervalId), 2000); // Stop creating emojis after 2 seconds
+      return () => {
+        clearInterval(intervalId); // Clean up on component unmount
+        clearTimeout(timeoutId); // Also clean up the timeout
+      };
+    }
+  }, [loaded, createEmoji]);
+
   if (!loaded) {
     return <div>Loading...</div>;
+  } else if (loaded) {
+    return (
+      <div>
+        <MatchNav />
+        <div className="match-page">
+          <MatchCard match={match} />
+        </div>
+      </div>
+    );
   }
 
-  return (
-    <div>
-      <NavBar />
-      <div className="match-page">
-        <MatchCard match={match} />
-      </div>
-    </div>
-  );
 }
 
 export default Match;
