@@ -122,7 +122,10 @@ function Profile() {
         setProfile(data);
         setStatus("loaded");
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => {
+        console.error("Error:", error);
+        setStatus("error");
+      });
   }, [id]);
 
   const [showFullBio, setShowFullBio] = useState(false);
@@ -160,6 +163,30 @@ function Profile() {
       </div>
     );
   }
+
+  if (status === "error") {
+    return (
+      <div className={classNames["profile-page"]}>
+        <NavBar />
+        <div className={classNames["loading-content"]}>
+          <div className={classNames["loading-internal"]}>
+            <h1 className={classNames["loading-title"]}>Error</h1>
+            <p className={classNames["loading-text"]}>
+              There was an error fetching the profile. Please check back later
+              or refresh the page.
+            </p>
+            <button
+              className={classNames["loading-button"]}
+              onClick={() => window.location.reload()}
+            >
+              Refresh
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={classNames["profile-page"]}>
       <NavBar />
@@ -228,16 +255,20 @@ function Profile() {
           </div>
           <hr />
 
-          <div className={classNames["section"]}>
-            <h3>In my free time, I enjoy...</h3>
-            <ul className={classNames["hobbies"]}>
-              {profile.profile.hobbies.map((activity, index) => (
-                <li key={index}>{activity}</li>
-              ))}
-            </ul>
-          </div>
+          {profile.profile.hobbies && (
+            <>
+              <div className={classNames["section"]}>
+                <h3>In my free time, I enjoy...</h3>
+                <ul className={classNames["hobbies"]}>
+                  {profile.profile.hobbies.map((activity, index) => (
+                    <li key={index}>{activity}</li>
+                  ))}
+                </ul>
+              </div>
 
-          <hr />
+              <hr />
+            </>
+          )}
 
           <div className={classNames["section"]}>
             <h3>My personality...</h3>
