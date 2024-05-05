@@ -149,9 +149,9 @@ function ChatInput({ toUser, currentUser, messages }) {
           messages: history,
         }),
         toUser.id === "00000000-0000-0000-0000-000000000000"
-          ? `Generate 4 short suggested questions about unique topics (less than 15 words) that the user (${currentUser.name}) can ask to the AI Q&A assistant. Respond with an unformatted JSON object with a key 'suggestions' containing an array of 4 strings.`
+          ? `Generate 4 short suggested questions about unique topics (less than 15 words) that the user (${currentUser.name}) can ask to the AI Q&A assistant. Newest messages are at the top. Respond with an unformatted JSON object with a key 'suggestions' containing an array of 4 strings.`
           : messages.length > 0
-          ? `Generate 4 unique short suggested messages (less than 15 words) in casual language that the user (${currentUser.name}) can send to the other user (${toUser.name}) to keep the conversation naturally flowing. Respond with an unformatted JSON object with a key 'suggestions' containing an array of 4 strings.`
+          ? `Generate 4 unique short suggested messages (less than 15 words) in casual language that the user (${currentUser.name}) can send to the other user (${toUser.name}) to keep the conversation naturally flowing. Newest messages are on top. Respond with an unformatted JSON object with a key 'suggestions' containing an array of 4 strings.`
           : `Generate 4 unique short suggested messages (less than 15 words) in casual language that the user (${currentUser.name}) can send to the other user (${toUser.name}) to start the conversation. Respond with an unformatted JSON object with a key 'suggestions' containing an array of 4 strings.`,
         null
       );

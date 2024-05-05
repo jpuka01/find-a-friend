@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import classNames from "./ProfileStyles.module.css";
 import DefaultAvatar from "../assets/Default_pfp.png";
+import loader from "../assets/loader.gif";
 
 const PERSONALITY_EMOJIS = {
   extroversion: ["🙈", "🤫", "😊", "😀", "🎉"],
@@ -39,7 +40,7 @@ const PERSONALITY_DESCRIPTIONS = {
     "Typically relaxed, gracefully navigates occasional emotional disturbances",
     "Emotionally responsive, embraces a wide spectrum of feelings with understanding",
     "Sensitive to stress but actively seeks ways to regain balance and comfort",
-    "Deeply empathetic towards self and others, regularly navigates intense emotions with care",
+    "Deeply emotional towards self and others, regularly navigates intense emotions with care",
   ],
   openness: [
     "Prefers routine, values traditional approaches over new ones",
@@ -55,9 +56,9 @@ function PersonalityTrait({ trait, level }) {
     <div className={classNames["personality-trait-container"]}>
       <div className={classNames["personality-trait"]}>
         <div>
-          <p title={PERSONALITY_DESCRIPTIONS[trait][level]}>
+          <p title={PERSONALITY_DESCRIPTIONS[trait][Math.round(level) - 1]}>
             <span className={classNames["personality-trait-emoji"]}>
-              {PERSONALITY_EMOJIS[trait][level]}
+              {PERSONALITY_EMOJIS[trait][Math.round(level) - 1]}
             </span>
             <span className={classNames["personality-trait-name"]}>
               {trait.charAt(0).toUpperCase() + trait.slice(1)}
@@ -99,16 +100,27 @@ function Interest({ interest, emoji, level }) {
 }
 
 function Profile() {
-  const [loaded, setLoaded] = useState(false);
+  const [status, setStatus] = useState("loading");
   const { id } = useParams();
   const [profile, setProfile] = useState({});
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("chat-app-user");
+    if (!storedUser) {
+      navigate("/login");
+    } else {
+      setCurrentUser(JSON.parse(storedUser));
+    }
+  }, [navigate]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_HOST_URI}/user/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setProfile(data);
-        setLoaded(true);
+        setStatus("loaded");
       })
       .catch((error) => console.error("Error:", error));
   }, [id]);
@@ -130,8 +142,23 @@ function Profile() {
     return profile.profile.interests.sort((a, b) => b.level - a.level);
   }, [profile]);
 
-  if (!loaded) {
-    return <div className="profile-page">Loading...</div>;
+  if (status === "loading") {
+    return (
+      <div className={classNames["profile-page"]}>
+        <NavBar />
+        <div className={classNames["loading-content"]}>
+          <div className={classNames["loading-internal"]}>
+            <h1 className={classNames["loading-title"]}>Loading...</h1>
+            <p className={classNames["loading-text"]}>
+              Please wait while we fetch the profile. This should only take a
+              few minutes. Do not refresh the page.
+            </p>
+
+            <img src={loader} alt="loader" />
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
     <div className={classNames["profile-page"]}>
@@ -157,11 +184,16 @@ function Profile() {
             <h4>I'm looking for...</h4>
             <p>{profile.profile.looking_for}</p>
           </div>
-          <div className={classNames["chat-button-container"]}>
-            <button className={classNames["chat-button"]}>
-              Start a conversation
-            </button>
-          </div>
+          {id !== currentUser.id && (
+            <div className={classNames["chat-button-container"]}>
+              <button
+                className={classNames["chat-button"]}
+                onClick={() => navigate(`/chat/${id}`)}
+              >
+                Start a conversation
+              </button>
+            </div>
+          )}
         </div>
         <div className={classNames["profile-details"]}>
           <div className={classNames["section"]}>

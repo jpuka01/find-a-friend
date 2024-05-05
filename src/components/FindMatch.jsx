@@ -9,7 +9,7 @@ function FindMatch({ error, onClose: handleClose }) {
         {error ? (
           <>
             <h1 className={classNames["find-match-title"]}>
-              Failed to Find Match
+              Unable to Find Match
             </h1>
             <p className={classNames["find-match-text"]}>
               Our servers are currently experiencing issues. Please try again at
@@ -25,6 +25,10 @@ function FindMatch({ error, onClose: handleClose }) {
         ) : (
           <>
             <h1 className={classNames["find-match-title"]}>Finding Match...</h1>
+            <p className={classNames["find-match-text"]}>
+              Please wait while we find a match for you. Do not refresh the
+              page.
+            </p>
             <img src={loader} alt="loader" />
           </>
         )}

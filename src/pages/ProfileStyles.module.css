@@ -9,6 +9,8 @@
 @media screen and (max-width: 940px) {
   .profile-content {
     grid-template-columns: auto;
+    width: 100%;
+    margin: 0;
   }
 }
 
@@ -27,7 +29,7 @@
 }
 
 .profile-sidebar {
-  margin: 50px;
+  margin: 1em;
 }
 
 .profile-image-container {
@@ -303,4 +305,40 @@
   line-height: 1.5;
   text-align: justify;
   text-justify: inter-word;
+}
+
+.loading-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+}
+
+.loading-internal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 40vw;
+}
+
+@media screen and (max-width: 940px) {
+  .loading-internal {
+    width: 90vw;
+  }
+}
+
+.loading-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.5rem;
+}
+
+.loading-text {
+  font-size: 1rem;
+  margin: 1rem;
+}
+
+.loading-loader {
+  margin: 1rem;
 }

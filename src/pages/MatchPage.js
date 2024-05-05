@@ -32,7 +32,7 @@ function MatchCard({ match }) {
           </button>
         )}
       </div>
-      <Link to={`/chat/${match._id}`}>
+      <Link to={`/chat/${match.id}`}>
         <button className="chat-button">Start a conversation</button>
       </Link>
       <Link to={`/user/${match.id}`}>
