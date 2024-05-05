@@ -181,7 +181,7 @@ function Profile() {
             ))}
           </div>
           <div className={classNames["section"]}>
-            <h4>I'm looking for...</h4>
+            <h3>I'm looking for...</h3>
             <p>{profile.profile.looking_for}</p>
           </div>
           {id !== currentUser.id && (

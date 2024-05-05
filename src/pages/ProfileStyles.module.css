@@ -48,7 +48,7 @@
 
 .show-more {
   display: inline-block;
-  color: blue;
+  color: teal;
   background-color: #eee;
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
@@ -99,7 +99,7 @@
 .interest-container {
   position: relative;
   display: block;
-  background-color: #eee;
+  background-color: #ffedc9;
   margin: 0.5rem;
   height: 2rem;
 }
@@ -117,12 +117,14 @@
   position: absolute;
   display: block;
   margin: 0;
-  background-color: #ccc;
+  background-color: /* a very light orange */ #ffdc96;
   height: 2rem;
   border-radius: 8px;
 }
 
-.profile-details h3 {
+.profile-details h3,
+.section h3 {
+  color: #fb5012;
   margin: 0.5rem 0;
 }
 
@@ -208,7 +210,7 @@
   display: flex;
   position: relative;
   overflow: hidden;
-  background-color: #ccc;
+  background-color: #ffdc96;
   font-size: 1.25rem;
   flex-shrink: 0;
   align-items: center;
@@ -234,7 +236,7 @@
 .personality-trait-container {
   position: relative;
   display: block;
-  background-color: #eee;
+  background-color: #ffedc9;
   margin: 0.5rem 0;
   height: 2rem;
 }
@@ -243,7 +245,7 @@
   position: absolute;
   display: block;
   margin: 0;
-  background-color: #ccc;
+  background-color: #ffdc96;
   height: 2rem;
   border-radius: 8px;
 }
@@ -341,4 +343,8 @@
 
 .loading-loader {
   margin: 1rem;
+}
+
+body {
+  background-color: #f0f0f0;
 }
